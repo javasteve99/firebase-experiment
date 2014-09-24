@@ -10,6 +10,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="assets/build/css/application.css" />
   <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script src="https://cdn.firebase.com/js/client/1.0.23/firebase.js"></script>
+  <script src="https://cdn.firebase.com/js/simple-login/1.6.4/firebase-simple-login.js"></script>
 </head>
 <body class="home">
 
@@ -39,6 +41,9 @@
   </div><!-- end of div.container -->
 </footer><!-- end of footer[role=contentinfo] -->
 
-<script src="assets/build/js/application.min.js"></script>
+<script>
+  var myRef = new Firebase("https://blazing-fire-7286.firebaseio.com/");
+</script>
+
 </body>
 </html>
