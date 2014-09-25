@@ -35,6 +35,7 @@
       </fieldset>
       <fieldset>
         <button type="button" name="log-in-button" id="log-in-button">Log In</button>
+        <button type="button" name="create-account-button" id="create-account-button">Create Account</button>
       </fieldset>
     </form>
 
@@ -51,7 +52,7 @@
   var logInEmail = document.getElementById("log-in-email"),
   logInPassword = document.getElementById("log-in-password"),
   logInButton = document.getElementById("log-in-button"),
-  logOutButton = document.getElementById("log-out-button"),
+  createAccountButton = document.getElementById("create-account-button"),
   myRef = new Firebase("https://blazing-fire-7286.firebaseio.com/"),
   auth = new FirebaseSimpleLogin(myRef, function(error, user) {
     if (error) {
@@ -76,6 +77,22 @@
 
   logInButton.addEventListener('click', function(event) {
     login();
+  });
+
+  function createAccount() {
+    var email = logInEmail.value;
+    var password = logInPassword.value;
+    auth.createUser(email, password, function(error, user) {
+      if (!error) {
+        login(user);
+      } else {
+        alert(error);
+      }
+    });
+  }
+
+  createAccountButton.addEventListener('click', function(event) {
+    createAccount();
   });
 
 </script>
