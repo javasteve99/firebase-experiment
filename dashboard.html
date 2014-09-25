@@ -20,7 +20,7 @@
     <h1 style="display: inline-block;">Dashboard</h1>
     <form method="post" action="index.html" id="log-out-form" style="float: right;">
       <fieldset>
-        <button type="submit" name="log-out-button">Log Out</button>
+        <button type="submit" name="log-out-button" id="log-out-button">Log Out</button>
       </fieldset>
     </form>
   </div><!-- end of div.container -->
@@ -42,7 +42,29 @@
 </footer><!-- end of footer[role=contentinfo] -->
 
 <script>
-  var myRef = new Firebase("https://blazing-fire-7286.firebaseio.com/");
+  var logOutButton = document.getElementById("log-out-button"),
+  myRef = new Firebase("https://blazing-fire-7286.firebaseio.com/"),
+  auth = new FirebaseSimpleLogin(myRef, function(error, user) {
+    if (error) {
+      // an error occurred while attempting login
+      console.log(error);
+    } else if (user) {
+      // user authenticated with Firebase
+      console.log("User " + user.email + " is logged in.");
+    } else {
+      // user is logged out
+      window.location.href = "index.html";
+    }
+  });
+
+  function logout() {
+    auth.logout();
+  }
+
+  logOutButton.addEventListener('click', function(event) {
+    logout();
+    window.location.href = "index.html";
+  });
 </script>
 
 </body>

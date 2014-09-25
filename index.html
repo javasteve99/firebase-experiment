@@ -24,7 +24,7 @@
 <div role="main">
   <div class="container">
 
-    <form method="post" action="dashboard.html" id="log-in-form">
+    <form method="post" id="log-in-form">
       <fieldset>
         <label for="log-in-email">Email:</label>
         <input id="log-in-email" type="email" autocorrect="off" autocapitalize="off" spellcheck="false" required />
@@ -34,7 +34,7 @@
         <input id="log-in-password" type="password" required />
       </fieldset>
       <fieldset>
-        <button type="submit" name="log-in-button">Log In</button>
+        <button type="submit" name="log-in-button" id="log-in-button">Log In</button>
       </fieldset>
     </form>
 
@@ -47,36 +47,37 @@
   </div><!-- end of div.container -->
 </footer><!-- end of footer[role=contentinfo] -->
 
-<!--<script>
-  var logInEmail = document.getElementById("log-in-email").value;
-  var logInPassword = document.getElementById("log-in-password").value;
-  var myRef = new Firebase("https://blazing-fire-7286.firebaseio.com/");
-  var authClient = new FirebaseSimpleLogin(myRef, function(error, user) {
+<script>
+  var logInEmail = document.getElementById("log-in-email"),
+  logInPassword = document.getElementById("log-in-password"),
+  logInButton = document.getElementById("log-in-button");
+  myRef = new Firebase("https://blazing-fire-7286.firebaseio.com/"),
+  auth = new FirebaseSimpleLogin(myRef, function(error, user) {
     if (error) {
       // an error occurred while attempting login
       console.log(error);
     } else if (user) {
       // user authenticated with Firebase
-      console.log("User ID: " + user.uid + ", Provider: " + user.provider);
+      window.location.href = "dashboard.html";
     } else {
       // user is logged out
+      console.log("User is not logged in.");
     }
   });
-  var authRef = new Firebase("https://blazing-fire-7286.firebaseio.com/.info/authenticated");
-  authRef.on("value", function(snap) {
-    if (snap.val() === true) {
-      alert("authenticated");
-    } else {
-      alert("not authenticated");
-    }
-  });
-  authClient.login('password', {
-    email: logInEmail,
-    password: logInPassword
-  });
-</script>-->
 
-<!-- the above is bad and does not work. refer to this when you have time to get it working http://jsfiddle.net/firebase/wPBj5/ -->
+  function login() {
+    auth.login('password', {
+      email: logInEmail.value,
+      password: logInPassword.value
+    });
+  }
+
+  logInButton.addEventListener('click', function(event) {
+    auth.login();
+    window.location.href = "dashboard.html";
+  });
+
+</script>
 
 </body>
 </html>
