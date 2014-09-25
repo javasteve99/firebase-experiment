@@ -13,7 +13,7 @@
   <script src="https://cdn.firebase.com/js/client/1.0.23/firebase.js"></script>
   <script src="https://cdn.firebase.com/js/simple-login/1.6.4/firebase-simple-login.js"></script>
 </head>
-<body class="home">
+<body>
 
 <header role="banner">
   <div class="container">
@@ -24,7 +24,7 @@
 <div role="main">
   <div class="container">
 
-    <form method="post" id="log-in-form">
+    <form id="log-in-form">
       <fieldset>
         <label for="log-in-email">Email:</label>
         <input id="log-in-email" type="email" autocorrect="off" autocapitalize="off" spellcheck="false" required />
@@ -34,7 +34,7 @@
         <input id="log-in-password" type="password" required />
       </fieldset>
       <fieldset>
-        <button type="submit" name="log-in-button" id="log-in-button">Log In</button>
+        <button type="button" name="log-in-button" id="log-in-button">Log In</button>
       </fieldset>
     </form>
 
@@ -50,7 +50,8 @@
 <script>
   var logInEmail = document.getElementById("log-in-email"),
   logInPassword = document.getElementById("log-in-password"),
-  logInButton = document.getElementById("log-in-button");
+  logInButton = document.getElementById("log-in-button"),
+  logOutButton = document.getElementById("log-out-button"),
   myRef = new Firebase("https://blazing-fire-7286.firebaseio.com/"),
   auth = new FirebaseSimpleLogin(myRef, function(error, user) {
     if (error) {
@@ -58,6 +59,7 @@
       console.log(error);
     } else if (user) {
       // user authenticated with Firebase
+      console.log("User " + user.email + " is logged in.");
       window.location.href = "dashboard.html";
     } else {
       // user is logged out
@@ -73,8 +75,7 @@
   }
 
   logInButton.addEventListener('click', function(event) {
-    auth.login();
-    window.location.href = "dashboard.html";
+    login();
   });
 
 </script>

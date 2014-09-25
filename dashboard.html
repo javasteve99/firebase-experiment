@@ -18,9 +18,9 @@
 <header role="banner">
   <div class="container">
     <h1 style="display: inline-block;">Dashboard</h1>
-    <form method="post" action="index.html" id="log-out-form" style="float: right;">
+    <form id="log-out-form" style="float: right;">
       <fieldset>
-        <button type="submit" name="log-out-button" id="log-out-button">Log Out</button>
+        <button type="button" name="log-out-button" id="log-out-button">Log Out</button>
       </fieldset>
     </form>
   </div><!-- end of div.container -->
@@ -63,7 +63,6 @@
 
   logOutButton.addEventListener('click', function(event) {
     logout();
-    window.location.href = "index.html";
   });
 </script>
 
